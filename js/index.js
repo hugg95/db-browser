@@ -1,3 +1,3 @@
 var ipc = require('ipc');
 
-console.log(ipc.send('db-query', 'select * from human'));
+console.log(ipc.send('db-query', 'show tables'));

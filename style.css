@@ -3,12 +3,51 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-    font-size: 12px;
+    font-size: 14px;
     font-family: 'Tahoma, Arial';
-    background-color: #f0f0f0;
+}
+
+tr,
+td {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+input {
+    outline: none;
+    border: 1px solid #c0c0c0;
 }
 
 #header {
     height: 80px;
     background-color: #c0c0c0;
+}
+
+#main {
+    height: 100%;
+}
+
+.conn {
+    width: 60%;
+    height: 260px;
+    margin: 50px auto;
+}
+
+.pre-tr {
+    margin-top: 10px;
+}
+
+.in {
+    width: 80%;
+    height: 26px;
+}
+
+.btn {
+    width: 86px;
+    height: 26px;
+}
+
+.l-btn {
+    margin-right: 20px;
 }
