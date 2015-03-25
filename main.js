@@ -1,15 +1,14 @@
-var app = require('app');  // Module to control application life.
-var BrowserWindow = require('browser-window');  // Module to create native browser window.
+var app = require('app');
+var BrowserWindow = require('browser-window');
 var ipc = require('ipc');
 var Menu = require('menu');
 
+// native application menu
 var topMenu = [{
         label: 'File',
         submenu: [{
             label: 'Create connection',
-            click: function() {
-                window.webContents.send('create-connection', true);
-            }
+            click: function() {}
         },
         {
             type: 'separator'
@@ -25,23 +24,15 @@ var topMenu = [{
 
 var menu = Menu.buildFromTemplate(topMenu);
 
-// Report crashes to our server.
 require('crash-reporter').start();
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the javascript object is GCed.
-var mainWindow = null;
+var window = null;
 
 var conn = require('./db/conn');
-console.log(conn);
 
-var connection = conn.create({
-    host: 'localhost',
-    user: 'root',
-    password: 'lncwwn',
-    database: 'demo'
-});
-connection.connect();
+var connection = null;
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
@@ -49,27 +40,44 @@ app.on('window-all-closed', function() {
     app.quit();
 });
 
-ipc.on('db-query', function(event, arg) {
-    console.log(arg);
-    connection.query(arg, function(err, rows) {
-        console.log(rows);
-    });
+app.on('open-url', function() {
+    console.log('open url');
 });
+
+ipc.on('db-connect', function(event, arg) {
+    var config = arg;
+    if (config) {
+        connection = conn.create(config);
+        connection.connect(function(err) {
+            var response = null;
+            if (err) {
+                response = {err: err, stack: err.stack};
+            }
+            event.sender.send('db-connect-reply', response);
+        });
+    }
+    //connection = conn.create();
+});
+
+ipc.on('db-query', function(event, arg) {
+    //
+});
+
 // This method will be called when atom-shell has done everything
 // initialization and ready for creating browser windows.
 app.on('ready', function() {
-  // Create the browser window.
-  window = new BrowserWindow({width: 1000, height: 600});
+    // Create the browser window.
+    window = new BrowserWindow({width: 1000, height: 600});
 
-  // and load the index.html of the app.
-  window.loadUrl('file://' + __dirname + '/index.html');
-  Menu.setApplicationMenu(menu);
+    // and load the index.html of the app.
+    window.loadUrl('file://' + __dirname + '/index.html');
+    Menu.setApplicationMenu(menu);
 
-  // Emitted when the window is closed.
-  window.on('closed', function() {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-      window = null;
-  });
+    // Emitted when the window is closed.
+    window.on('closed', function() {
+        // Dereference the window object, usually you would store windows
+        // in an array if your app supports multi windows, this is the time
+        // when you should delete the corresponding element.
+        window = null;
+    });
 });

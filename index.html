@@ -4,28 +4,55 @@
     <meta charset="UTF-8">
     <title>DB-Browser</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/lib/bootstrap.min.css" rel="stylesheet">
-    <link href="css/lib/bootstrap.theme.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="css/lib/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/lib/bootstrap.theme.min.css" rel="stylesheet" media="screen">
+    <link href="css/style.css" rel="stylesheet" media="screen">
+    <script>
+        global.jQuery = require('jquery');
+        require('bootstrap');
+        global.$ = global.jQuery;
+    </script>
 </head>
 <body>
     <div class="container-fluid">
         <div id="header" class="row navbar navbar-default" role="navigation">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#/conn/create">DB-Browser</a>
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="javascript:;">DB-Browser</a>
+                </div>
+                <div class="collapse navbar-collapse" id="test">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" 
+                                role="button" aria-expanded="false">File<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#/conn/create" class="btn">New connection</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#/conn/open" class="btn">Open connection</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#/conn/close" class="btn disabled" role="button">Close connection</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div id="main" class="row">
-            <ng-view></ng-view>
+            <div class="col-sm-3 col-md-2">
+                <div class="panel panel-default" style="height:300px;"></div>
+            </div>
+            <div class="col-sm-9 col-md-10">
+                <ng-view></ng-view>
+            </div>
         </div>
         <div id="footer"></div>
     </div>
 </body>
-<script type="text/javascript" src="js/lib/jquery.js"></script>
-<script type="text/javascript" src="js/lib/angular.js"></script>
+
 <script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/lib/dropdown.js"></script>
+<script type="text/javascript" src="js/lib/angular.js"></script>
 <script type="text/javascript" src="js/app.js"></script>
 <script type="text/javascript" src="js/controller/GlobalController.js"></script>
 <script type="text/javascript" src="js/controller/ConnectionController.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
 </html>

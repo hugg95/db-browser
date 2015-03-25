@@ -12,7 +12,6 @@ td {
     text-align: center;
 }
 
-.conn {
-    width: 76%;
-    margin-top: 30px;
+.sidebar {
+    background-color: #f5f5f5;
 }

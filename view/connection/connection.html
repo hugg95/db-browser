@@ -7,35 +7,35 @@
             <!--label>Connection Name:</label-->
             <div class="input-group">
                 <span class="input-group-addon">Connection Name</span>
-                <input type="text" class="form-control" placeholder="enter connection name">
+                <input type="text" class="form-control" ng-model="connection.name" autofocus>
             </div>
         </div>
         <div class="form-group">
             <!-- <label>Host/IP:</label> -->
             <div class="input-group">
                 <span class="input-group-addon">Host/IP</span>
-                <input type="text" class="form-control" placeholder="enter host or IP">
+                <input type="text" class="form-control" ng-model="connection.host">
             </div>
         </div>
         <div class="form-group">
             <!-- <label>Port:</label> -->
             <div class="input-group">
                 <span class="input-group-addon">Port</span>
-                <input type="text" class="form-control" placeholder="enter port">
+                <input type="text" class="form-control" ng-model="connection.port">
             </div>
         </div>
         <div class="form-group">
             <!-- <label>User:</label> -->
             <div class="input-group">
                 <span class="input-group-addon">User</span>
-                <input type="text" class="form-control" placeholder="enter user name">
+                <input type="text" class="form-control" ng-model="connection.user">
             </div>
         </div>
         <div class="form-group">
             <!-- <label>Password:</label> -->
             <div class="input-group">
                 <span class="input-group-addon">Password</span>
-                <input type="password" class="form-control" placeholder="enter password">
+                <input type="password" class="form-control" ng-model="connection.password">
             </div>
         </div>
         <div class="checkout">
@@ -45,8 +45,17 @@
             </label>
         </div>
         <div class="form-group text-center">
-            <button class="btn btn-default">Test</button>
-            <button class="btn btn-primary">Connect</button>
+            <button class="btn btn-default" ng-click="testConnection();">Test</button>
+            <button class="btn btn-primary" ng-click="createConnection();">Connect</button>
         </div>
+    </div>
+    <div class="alert alert-dismissible" ng-class="{'alert-warning': !connection.err.fatal, 'alert-danger': connection.err.fatal}" role="alert" ng-show="msgAlert && connection.err">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <p>{{connection.err.message}}</p>
+        <p>Error Code: {{connection.err.code}}</p>
+    </div>
+    <div class="alert alert-success alert-dismissible" role="alert" ng-show="msgAlert && !connection.err">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <p>Connect successful!</p>
     </div>
 </div>
