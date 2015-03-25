@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "main": "main.js",
   "devDependencies": {
+    "angular-app": "0.0.1-SNAPSHOT",
+    "angularjs": "0.0.1",
+    "bootstrap": "^3.3.4",
     "mysql": "^2.5.5"
   }
 }

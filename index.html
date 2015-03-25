@@ -3,39 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <title>DB-Browser</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/lib/bootstrap.min.css" rel="stylesheet">
+    <link href="css/lib/bootstrap.theme.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-    <div id="panel">
-        <div id="header"></div>
-        <div id="main">
-            <table class="conn" cellpadding="0" cellspacing="0">
-                <tr class="pre-tr">
-                    <td>connection name:</td>
-                    <td><input type="text" class="in" /></td>
-                </tr>
-                <tr class="pre-tr">
-                    <td>host:</td>
-                    <td><input type="text" class="in" /></td>
-                </tr>
-                <tr class="pre-tr">
-                    <td>user:</td>
-                    <td><input type="text" class="in" /></td>
-                </tr>
-                <tr class="pre-tr">
-                    <td>password:</td>
-                    <td><input type="text" class="in" /></td>
-                </tr>
-                <tr class="pre-tr">
-                    <td colspan="2">
-                        <button class="btn l-btn">test</button>
-                        <button class="btn r-btn">connect</button>
-                    </td>
-                </tr>
-            </table>
+    <div class="container-fluid">
+        <div id="header" class="row navbar navbar-default" role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">DB-Browser</a>
+            </div>
+        </div>
+        <div id="main" class="row">
+            <div class="conn panel panel-default center-block">
+                <div class="panel-heading">
+                    <h3>Create Connection</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <!--label>Connection Name:</label-->
+                        <div class="input-group">
+                            <span class="input-group-addon">Connection Name</span>
+                            <input type="text" class="form-control" placeholder="enter connection name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <!-- <label>Host/IP:</label> -->
+                        <div class="input-group">
+                            <span class="input-group-addon">Host/IP</span>
+                            <input type="text" class="form-control" placeholder="enter host or IP">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <!-- <label>Port:</label> -->
+                        <div class="input-group">
+                            <span class="input-group-addon">Port</span>
+                            <input type="text" class="form-control" placeholder="enter port">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <!-- <label>User:</label> -->
+                        <div class="input-group">
+                            <span class="input-group-addon">User</span>
+                            <input type="text" class="form-control" placeholder="enter user name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <!-- <label>Password:</label> -->
+                        <div class="input-group">
+                            <span class="input-group-addon">Password</span>
+                            <input type="password" class="form-control" placeholder="enter password">
+                        </div>
+                    </div>
+                    <div class="checkout">
+                        <label>
+                            <input type="checkbox">
+                            Remember password
+                        </label>
+                    </div>
+                    <div class="form-group text-center">
+                        <button class="btn btn-default">Test</button>
+                        <button class="btn btn-primary">Connect</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <div id="footer"></div>
     </div>
 </body>
+<script type="text/javascript" src="js/lib/jquery.js"></script>
+<script type="text/javascript" src="js/lib/angular.js"></script>
+<script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 </html>

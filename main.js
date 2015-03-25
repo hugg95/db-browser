@@ -1,6 +1,33 @@
 var app = require('app');  // Module to control application life.
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
 var ipc = require('ipc');
+var Menu = require('menu');
+
+var topMenu = [
+    {
+    label: 'File',
+    submenu: [
+      {
+        label: 'Create connection',
+        click: function() {
+          console.log('create connection');
+        }
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: 'Quit',
+        accelerator: 'Command+Q',
+        click: function() {
+            app.quit();
+        }
+      },
+    ]
+  }
+];
+
+var menu = Menu.buildFromTemplate(topMenu);
 
 // Report crashes to our server.
 require('crash-reporter').start();
@@ -40,6 +67,7 @@ app.on('ready', function() {
 
   // and load the index.html of the app.
   mainWindow.loadUrl('file://' + __dirname + '/index.html');
+  Menu.setApplicationMenu(menu);
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
