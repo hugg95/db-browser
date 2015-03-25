@@ -3,29 +3,25 @@ var BrowserWindow = require('browser-window');  // Module to create native brows
 var ipc = require('ipc');
 var Menu = require('menu');
 
-var topMenu = [
-    {
-    label: 'File',
-    submenu: [
-      {
-        label: 'Create connection',
-        click: function() {
-          console.log('create connection');
-        }
-      },
-      {
-        type: 'separator'
-      },
-      {
-        label: 'Quit',
-        accelerator: 'Command+Q',
-        click: function() {
-            app.quit();
-        }
-      },
-    ]
-  }
-];
+var topMenu = [{
+        label: 'File',
+        submenu: [{
+            label: 'Create connection',
+            click: function() {
+                window.webContents.send('create-connection', true);
+            }
+        },
+        {
+            type: 'separator'
+        },
+        {
+            label: 'Quit',
+            accelerator: 'Command+Q',
+            click: function() {
+                app.quit();
+            }
+        }]
+}];
 
 var menu = Menu.buildFromTemplate(topMenu);
 
@@ -63,17 +59,17 @@ ipc.on('db-query', function(event, arg) {
 // initialization and ready for creating browser windows.
 app.on('ready', function() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 1000, height: 600});
+  window = new BrowserWindow({width: 1000, height: 600});
 
   // and load the index.html of the app.
-  mainWindow.loadUrl('file://' + __dirname + '/index.html');
+  window.loadUrl('file://' + __dirname + '/index.html');
   Menu.setApplicationMenu(menu);
 
   // Emitted when the window is closed.
-  mainWindow.on('closed', function() {
+  window.on('closed', function() {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
-    mainWindow = null;
+      window = null;
   });
 });
