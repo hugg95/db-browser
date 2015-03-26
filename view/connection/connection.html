@@ -1,6 +1,6 @@
-<div class="conn panel panel-default center-block">
+<div class="panel panel-default center-block">
     <div class="panel-heading">
-        <h3>Create Connection</h3>
+        <h4>Create Connection</h4>
     </div>
     <div class="panel-body">
         <div class="form-group">
@@ -48,14 +48,5 @@
             <button class="btn btn-default" ng-click="testConnection();">Test</button>
             <button class="btn btn-primary" ng-click="createConnection();">Connect</button>
         </div>
-    </div>
-    <div class="alert alert-dismissible" ng-class="{'alert-warning': !connection.err.fatal, 'alert-danger': connection.err.fatal}" role="alert" ng-show="msgAlert && connection.err">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-        <p>{{connection.err.message}}</p>
-        <p>Error Code: {{connection.err.code}}</p>
-    </div>
-    <div class="alert alert-success alert-dismissible" role="alert" ng-show="msgAlert && !connection.err">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-        <p>Connect successful!</p>
     </div>
 </div>

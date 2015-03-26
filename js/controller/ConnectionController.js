@@ -1,8 +1,6 @@
 var connectionModule = angular.module('connectionModule', []);
 
 connectionModule.controller('connectionController', ['$scope', function($scope) {
-	
-	$scope.ipc = require('ipc');
 
 	// default mysql connection config
 	$scope.connection = {
@@ -30,28 +28,46 @@ connectionModule.controller('connectionController', ['$scope', function($scope) 
 	};
 
 	/**
-	 * response listener
+	 * listen to the db-connect reply
 	 */
 	$scope.ipc.on('db-connect-reply', function(arg) {
 
 		$scope.$apply(function() {
 
-			$scope.msgAlert = true;
+			// default message to show
+			var _message = {
+				title: '',
+				body: '',
+				fatal: false,
+				success: true
+			};
 
+			// connection successful
 			if (!arg) {
-				$scope.connection.err = null;
+				_message.title = 'Success';
+				_message.body = 'connection successful';
+				$scope.showMessageModal(_message);
 				return;
 			}
 
+			// connection failed
 			var _error = arg.err,
-				_msg = arg.stack;
+				_msg = arg.stack,
+				_code = _error.code;
 
-			$scope.connection.err = {};
-			$scope.connection.err.code = _error.code;
-			$scope.connection.err.fatal = _error.fatal;
+			_message.fatal = _error.fatal;
+			_message.success = false;
 
 			// get the first line of the error stack
-			$scope.connection.err.message = _msg.substr(0, _msg.indexOf('\n'));
+			_message.body = _msg.substr(0, _msg.indexOf('\n'));
+
+			_message.title = 'Warning info: ';
+
+			if (_error.fatal) _message.title = 'Fatal error: ';
+			_message.title += _code;
+
+			$scope.showMessageModal(_message);
+
 		});
 
 	});

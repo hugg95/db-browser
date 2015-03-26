@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "main": "main.js",
   "devDependencies": {
-    "angular-app": "0.0.1-SNAPSHOT",
-    "angularjs": "0.0.1",
+    "angular": "^1.3.15",
+    "angular-route": "^1.3.15",
     "bootstrap": "^3.3.4",
     "jquery": "^2.1.3",
     "mysql": "^2.5.5"
