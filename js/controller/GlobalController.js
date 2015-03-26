@@ -41,6 +41,11 @@ globalModule.controller('globalController', ['$scope', '$location', function($sc
     		if (curr.id === connection.id) {
     			return true;
     		}
+    		if (curr.host === connection.host
+    			&& curr.port === connection.port
+    			&& curr.user === connection.user) {
+    			return true;
+    		}
     	}
 
     	return false;
