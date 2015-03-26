@@ -2,24 +2,24 @@ var app = require('app');
 var BrowserWindow = require('browser-window');
 var ipc = require('ipc');
 var Menu = require('menu');
+var dialog = require('dialog');
 
 // native application menu
 var topMenu = [{
-        label: 'File',
-        submenu: [{
-            label: 'Create connection',
-            click: function() {}
-        },
-        {
-            type: 'separator'
-        },
-        {
-            label: 'Quit',
-            accelerator: 'Command+Q',
-            click: function() {
-                app.quit();
-            }
-        }]
+    label: 'File',
+    submenu: [{
+        label: 'New connection',
+        click: function() {
+            console.log('new connection');
+        }
+    },
+    {
+        label: 'Quit',
+        accelerator: 'Command+Q',
+        click: function() {
+            app.quit();
+        }
+    }]
 }];
 
 var menu = Menu.buildFromTemplate(topMenu);
@@ -45,9 +45,8 @@ app.on('open-url', function() {
 });
 
 ipc.on('db-connect', function(event, arg) {
-    var config = arg;
-    if (config) {
-        connection = conn.create(config);
+    if (arg) {
+        connection = conn.create(arg);
         connection.connect(function(err) {
             var response = null;
             if (err) {
@@ -56,11 +55,14 @@ ipc.on('db-connect', function(event, arg) {
             event.sender.send('db-connect-reply', response);
         });
     }
-    //connection = conn.create();
 });
 
 ipc.on('db-query', function(event, arg) {
     //
+});
+
+ipc.on('show-error', function(event, arg) {
+    dialog.showErrorBox('hello', 'dsdsdsdsdsdsdsds');
 });
 
 // This method will be called when atom-shell has done everything
@@ -72,6 +74,8 @@ app.on('ready', function() {
     // and load the index.html of the app.
     window.loadUrl('file://' + __dirname + '/index.html');
     Menu.setApplicationMenu(menu);
+
+    //dialog.showMessageBox(window, {type: 'warning', title: 'hello', buttons: ['1', '2', '3']});
 
     // Emitted when the window is closed.
     window.on('closed', function() {

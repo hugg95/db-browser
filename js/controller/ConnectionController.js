@@ -11,12 +11,36 @@ connectionModule.controller('connectionController', ['$scope', function($scope) 
 		password: ''
 	};
 
-	$scope.msgAlert = false;
+	$scope.duplicateMessage = {
+		title: 'duplicate connection',
+		body: 'the connection has exist',
+		fatal: false,
+		success: false
+	};
+
+    $scope.findMaxId = function() {
+        var maxId = -1;
+        if (!$scope.connections || $scope.connections.length === 0) {
+        	return 0;
+        }
+        $scope.connections.forEach(function(item, index) {
+            if (item.id > maxId) {
+                maxId = item.id;
+            }
+        });
+
+        return maxId + 1;
+    };
+
+    $scope.connection.id = $scope.findMaxId();
+
+    $scope.connectionBackup = null;
 
 	/**
 	 * test the connection
 	 */
 	$scope.testConnection = function() {
+        $scope.connection.test = true;
 		$scope.ipc.send('db-connect', $scope.connection);
 	};
 
@@ -24,8 +48,57 @@ connectionModule.controller('connectionController', ['$scope', function($scope) 
 	 * start to create a connection
 	 */
 	$scope.createConnection = function() {
-		//
+		if ($scope.connectionBackup) {
+			if ($scope.connectionBackup.host === $scope.connection.host 
+				&& $scope.connectionBackup.port === $scope.connection.port
+				&& $scope.connectionBackup.user === $scope.connection.user) {
+				$scope.showMessageModal($scope.duplicateMessage);
+				return;
+			} else {
+				$scope.connection.id = $scope.connectionBackup.id + 1;
+			}
+		}
+		
+        $scope.connection.test = false;
+		$scope.ipc.send('db-connect', $scope.connection);
 	};
+
+    $scope.handleConnection = function(response) {
+
+        // default message to show
+        var message = {
+            title: '',
+            body: '',
+            fatal: false,
+            success: true
+        };
+
+        // connection successful
+        if (!response) {
+            message.title = 'Success';
+            message.body = 'connection successful';
+            return message;
+        }
+
+        // connection failed
+        var _error = response.err,
+            _msg = response.stack,
+            _code = _error.code;
+
+        message.fatal = _error.fatal;
+        message.success = false;
+
+        // get the first line of the error stack
+        message.body = _msg.substr(0, _msg.indexOf('\n'));
+
+        message.title = 'Warning info: ';
+
+        if (_error.fatal) message.title = 'Fatal error: ';
+        message.title += _code;
+
+        return message;
+
+    };
 
 	/**
 	 * listen to the db-connect reply
@@ -33,43 +106,22 @@ connectionModule.controller('connectionController', ['$scope', function($scope) 
 	$scope.ipc.on('db-connect-reply', function(arg) {
 
 		$scope.$apply(function() {
-
-			// default message to show
-			var _message = {
-				title: '',
-				body: '',
-				fatal: false,
-				success: true
-			};
-
-			// connection successful
-			if (!arg) {
-				_message.title = 'Success';
-				_message.body = 'connection successful';
-				$scope.showMessageModal(_message);
-				return;
-			}
-
-			// connection failed
-			var _error = arg.err,
-				_msg = arg.stack,
-				_code = _error.code;
-
-			_message.fatal = _error.fatal;
-			_message.success = false;
-
-			// get the first line of the error stack
-			_message.body = _msg.substr(0, _msg.indexOf('\n'));
-
-			_message.title = 'Warning info: ';
-
-			if (_error.fatal) _message.title = 'Fatal error: ';
-			_message.title += _code;
-
-			$scope.showMessageModal(_message);
-
+            var msg = $scope.handleConnection(arg);
+            if ($scope.connection.test) {
+                $scope.showMessageModal(msg);
+            } else if (!msg.success) {
+                $scope.showMessageModal(msg);
+            } else {
+            	if (!$scope.connectionExist($scope.connection)) {
+            		$scope.setConnection($scope.connection);
+            		$scope.connectionBackup = $scope.connection;
+            	} else {
+            		$scope.showMessageModal($scope.duplicateMessage);
+            	}
+            }
 		});
 
 	});
 
 }]);
+
