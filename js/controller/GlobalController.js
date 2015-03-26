@@ -51,4 +51,8 @@ globalModule.controller('globalController', ['$scope', '$location', function($sc
     	return false;
     };
 
+    $scope.resetConnections = function() {
+    	localStorage.removeItem('connections');
+    };
+
 }]);
