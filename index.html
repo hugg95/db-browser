@@ -50,11 +50,11 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title text-danger" ng-if="message.fatal">{{message.title}}</h4>
-                    <h4 class="modal-title text-warning" ng-if="!messgae.fatal&&!message.success">{{message.title}}</h4>
+                    <h4 class="modal-title text-warning" ng-if="!message.fatal&&!message.success">{{message.title}}</h4>
                     <h4 class="modal-title text-success" ng-if="message.success">{{message.title}}</h4>
                 </div>
                 <div class="modal-body text-danger" ng-if="message.fatal">{{message.body}}</div>
-                <div class="modal-body text-warning" ng-if="!messgae.fatal&&!message.success">{{message.body}}</div>
+                <div class="modal-body text-warning" ng-if="!message.fatal&&!message.success">{{message.body}}</div>
                 <div class="modal-body text-success" ng-if="message.success">{{message.body}}</div>
             </div>
         </div>
