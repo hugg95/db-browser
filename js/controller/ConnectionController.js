@@ -1,10 +1,10 @@
 var connectionModule = angular.module('connectionModule', []);
 
-connectionModule.controller('connectionController', ['$scope', function($scope) {
+connectionModule.controller('connectionController', ['$scope', '$location', function($scope, $location) {
 
 	// default mysql connection config
 	$scope.connection = {
-		name: 'anonymous',
+		name: '',
 		host: 'localhost',
 		port: 3306,
 		user: 'root',
@@ -58,7 +58,9 @@ connectionModule.controller('connectionController', ['$scope', function($scope) 
 				$scope.connection.id = $scope.connectionBackup.id + 1;
 			}
 		}
-		
+		if (!$scope.connection.name) {
+			$scope.connection.name = $scope.connection.user + '@'+ $scope.connection.host;
+		}
         $scope.connection.test = false;
 		$scope.ipc.send('db-connect', $scope.connection);
 	};
@@ -115,6 +117,7 @@ connectionModule.controller('connectionController', ['$scope', function($scope) 
             	if (!$scope.connectionExist($scope.connection)) {
             		$scope.setConnection($scope.connection);
             		$scope.connectionBackup = $scope.connection;
+            		$location.path('/table/list');
             	} else {
             		$scope.showMessageModal($scope.duplicateMessage);
             	}

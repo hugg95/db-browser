@@ -4,10 +4,27 @@ globalModule.controller('globalController', ['$scope', '$location', function($sc
 
 	$scope.ipc = require('ipc');
 
+	$scope.confimPassed = false;
+
 	$scope.showMessageModal = function(message) {
 		if (!message) return;
 		$scope.message = message;
 		$('#message-modal').modal('show');
+	};
+
+	$scope.showConfirmModal = function(confirm, callback) {
+		$scope.confimPassed = false;
+		if (!confirm) return;
+		$scope.confirm = confirm;
+		$('#confirm-modal').modal('show');
+	};
+
+	$scope.passConfirm = function(fn) {
+		$scope.confimPassed = true;
+		$('#confirm-modal').modal('hide');
+		if (typeof fn === 'function') {
+			fn();
+		}
 	};
 
     $scope.connections = [];
@@ -51,8 +68,19 @@ globalModule.controller('globalController', ['$scope', '$location', function($sc
     	return false;
     };
 
+    /**
+     * reset and clear all of the connections
+     */
     $scope.resetConnections = function() {
     	localStorage.removeItem('connections');
+    	$scope.connections = [];
+    };
+
+    $scope.confirmQuit = function() {
+    	$scope.showConfirmModal({text: 'Do you really want to quit?'});
+    	$scope.confirmCallback = function() {
+    		$scope.ipc.send('app-quit');
+    	};
     };
 
 }]);

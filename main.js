@@ -57,6 +57,10 @@ ipc.on('db-connect', function(event, arg) {
     }
 });
 
+ipc.on('app-quit', function(event, arg) {
+    app.quit();
+});
+
 ipc.on('db-query', function(event, arg) {
     //
 });
@@ -69,7 +73,7 @@ ipc.on('show-error', function(event, arg) {
 // initialization and ready for creating browser windows.
 app.on('ready', function() {
     // Create the browser window.
-    window = new BrowserWindow({width: 1000, height: 600});
+    window = new BrowserWindow({width: 1366, height: 768});
 
     // and load the index.html of the app.
     window.loadUrl('file://' + __dirname + '/index.html');
