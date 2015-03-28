@@ -116,6 +116,7 @@ connectionModule.controller('connectionController', ['$scope', '$location', func
             } else {
             	if (!$scope.connectionExist($scope.connection)) {
             		$scope.setConnection($scope.connection);
+            		$scope.setCurrentConnection($scope.connection);
             		$scope.connectionBackup = $scope.connection;
             		$location.path('/table/list');
             	} else {

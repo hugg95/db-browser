@@ -4,6 +4,12 @@ globalModule.controller('globalController', ['$scope', '$window', '$location', f
 
 	$scope.ipc = require('ipc');
 
+	// the current connection
+	$scope.currentConnection = null;
+	$scope.setCurrentConnection = function(connection) {
+		$scope.currentConnection = connection;
+	};
+
 	$scope.confimPassed = false;
 
 	$scope.showMessageModal = function(message) {

@@ -1,4 +1,4 @@
-var dbBrowser = angular.module('dbBrowser', ['ngRoute', 'browserModule', 'globalModule', 'connectionModule', 'tableModule', 'systemModule']);
+var dbBrowser = angular.module('dbBrowser', ['ngRoute', 'browserModule', 'globalModule', 'connectionModule', 'databaseModule', 'tableModule', 'systemModule']);
 
 dbBrowser.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
     $routeProvider
@@ -13,6 +13,10 @@ dbBrowser.config(['$routeProvider', '$httpProvider', function($routeProvider, $h
     .when('/conn/open', {
     	templateUrl: 'view/connection/connection.html',
     	controller: 'connectionController'
+    })
+    .when('/db/list/:connectionId', {
+    	templateUrl: 'view/db/dbs.html',
+    	controller: 'databaseController'
     })
     .when('/table/list', {
     	templateUrl: 'view/table/tables.html',
