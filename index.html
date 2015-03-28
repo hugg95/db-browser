@@ -8,7 +8,7 @@
     <link href="css/lib/bootstrap.theme.min.css" rel="stylesheet" media="screen">
     <link href="css/style.css" rel="stylesheet" media="screen">
 </head>
-<body>
+<body ng-controller="browserController">
     <div class="container-fluid">
         <ng-include src="'view/menu.html'"></ng-include>
         <div id="main" class="row">
@@ -84,6 +84,7 @@
     global.$ = global.jQuery;
 </script>
 <script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/controller/BrowserController.js"></script>
 <script type="text/javascript" src="js/controller/GlobalController.js"></script>
 <script type="text/javascript" src="js/controller/ConnectionController.js"></script>
 <script type="text/javascript" src="js/controller/TableController.js"></script>

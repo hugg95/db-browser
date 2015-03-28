@@ -10,7 +10,7 @@ var topMenu = [{
     submenu: [{
         label: 'New connection',
         click: function() {
-            console.log('new connection');
+            window.webContents.send('call-new-conn');
         }
     },
     {

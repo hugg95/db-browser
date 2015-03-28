@@ -1,4 +1,4 @@
-var dbBrowser = angular.module('dbBrowser', ['ngRoute', 'globalModule', 'connectionModule', 'tableModule', 'systemModule']);
+var dbBrowser = angular.module('dbBrowser', ['ngRoute', 'browserModule', 'globalModule', 'connectionModule', 'tableModule', 'systemModule']);
 
 dbBrowser.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
     $routeProvider

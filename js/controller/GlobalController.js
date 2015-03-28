@@ -1,6 +1,6 @@
 var globalModule = angular.module('globalModule', []);
 
-globalModule.controller('globalController', ['$scope', '$location', function($scope, $location) {
+globalModule.controller('globalController', ['$scope', '$window', '$location', function($scope, $window, $location) {
 
 	$scope.ipc = require('ipc');
 
