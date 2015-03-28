@@ -13,9 +13,15 @@
         <ng-include src="'view/menu.html'"></ng-include>
         <div id="main" class="row">
             <div class="col-sm-3 col-md-2">
-                <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-info active" ng-repeat="conn in connections">{{conn.name}}</a>
-                    <a href="#" class="list-group-item list-group-item-info" ng-repeat="conn in connections">{{conn.name}}</a>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Connections</div>
+                    <div class="panel-body">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-info" ng-repeat="conn in connections track by $index">
+                            <span class="glyphicon glyphicon-record"></span> {{conn.name}}</a>
+                            <div ng-if="!connections || connections.length==0"><span class="glyphicon glyphicon-info-sign"></span> No connections</div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-9 col-md-10">
