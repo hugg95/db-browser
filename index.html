@@ -18,7 +18,8 @@
                         <div class="panel-heading">Connections</div>
                         <div class="panel-body">
                             <div class="list-group">
-                                <a ng-repeat="conn in connections track by $index" href="#/db/list/{{conn.id}}" class="list-group-item list-group-item-info" ng-class="{active: currentConnection.id == conn.id}">
+                                <a ng-repeat="conn in connections track by $index" href="#/db/list/{{conn.id}}" class="list-group-item list-group-item-info" 
+                                    ng-class="{active: currentConnection.id == conn.id}">
                                 <span class="glyphicon glyphicon-record"></span> {{conn.name}}</a>
                                 <div ng-if="!connections || connections.length==0"><span class="glyphicon glyphicon-info-sign"></span> No connections</div>
                             </div>

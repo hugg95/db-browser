@@ -59,7 +59,7 @@ ipc.on('db-connect', function(event, arg) {
 
 ipc.on('show-dbs', function(event, arg) {
     connection.query('show databases', function(err, rows) {
-        ipc.send('show-dbs-reply', rows);
+        event.sender.send('show-dbs-reply', rows);
     });
 });
 

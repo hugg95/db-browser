@@ -3,16 +3,14 @@
         <h5>Databases</h5>
     </div>
     <div class="panel-body row">
-    	<table class="table">
+    <span ng-repeat="db in databases">{{db.Database}}</span>
+    	<!--table class="table">
     		<tr>
-    			<td>1</td><td>2</td><td>3</td><td>1</td><td>2</td><td>3</td>
+    			<td>#</td><td>Name</td><td>3</td>
     		</tr>
-    		<tr>
-    			<td>1</td><td>1</td><td>1</td><td>1</td><td>2</td><td>3</td>
-    		</tr>
-    		<tr>
-    			<td>1</td><td>1</td><td>1</td><td>1</td><td>2</td><td>3</td>
-    		</tr>
-    	</table>
+    		<tr ng-repeat="db in databases">
+    			<td>1</td><td>{{db.Database}}</td>
+    		</tr
+    	</table-->
     </div>
 </div>
