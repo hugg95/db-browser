@@ -2,14 +2,9 @@
     <div class="panel-heading">
         <h5>Databases</h5>
     </div>
-    <div class="panel-body row">
-    	<table class="table">
-    		<tr>
-    			<td>#</td><td>Name</td>
-    		</tr>
-    		<tr ng-repeat="db in databases">
-    			<td>1</td><td>{{db.Database}}</td>
-    		</tr
-    	</table>
+    <div class="panel-body">
+    	<ul class="list-group clearfix">
+		  	<a class="list-group-item a" href="#" ng-repeat="db in databases">{{db.Database}}</a>
+		</ul>
     </div>
 </div>
