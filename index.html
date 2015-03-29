@@ -9,64 +9,65 @@
     <link href="css/style.css" rel="stylesheet" media="screen">
 </head>
 <body ng-controller="browserController">
-    <div class="container-fluid">
-        <ng-include src="'view/menu.html'"></ng-include>
-        <div id="main" class="row">
-            <div class="col-sm-3 col-md-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Connections</div>
-                    <div class="panel-body">
-                        <div class="list-group">
-                            <a ng-repeat="conn in connections track by $index" href="#/db/list/{{conn.id}}" class="list-group-item list-group-item-info" ng-class="{active: currentConnection.id == conn.id}">
-                            <span class="glyphicon glyphicon-record"></span> {{conn.name}}</a>
-                            <div ng-if="!connections || connections.length==0"><span class="glyphicon glyphicon-info-sign"></span> No connections</div>
+    <div ng-controller="connectionController">
+        <div class="container-fluid">
+            <ng-include src="'view/menu.html'"></ng-include>
+            <div id="main" class="row">
+                <div class="col-sm-3 col-md-2">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Connections</div>
+                        <div class="panel-body">
+                            <div class="list-group">
+                                <a ng-repeat="conn in connections track by $index" href="#/db/list/{{conn.id}}" class="list-group-item list-group-item-info" ng-class="{active: currentConnection.id == conn.id}">
+                                <span class="glyphicon glyphicon-record"></span> {{conn.name}}</a>
+                                <div ng-if="!connections || connections.length==0"><span class="glyphicon glyphicon-info-sign"></span> No connections</div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="col-sm-9 col-md-10">
+                    <ng-view></ng-view>
+                </div>
             </div>
-            <div class="col-sm-9 col-md-10">
-                <ng-view></ng-view>
-            </div>
+            <div id="footer"></div>
         </div>
-        <div id="footer"></div>
-    </div>
     
-    <!-- message modal -->
-    <div class="modal fade" id="message-modal" tabindex="-1" role="dialog" aria-labelledby="messageModal" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title text-danger" ng-if="message.fatal">{{message.title}}</h4>
-                    <h4 class="modal-title text-warning" ng-if="!message.fatal&&!message.success">{{message.title}}</h4>
-                    <h4 class="modal-title text-success" ng-if="message.success">{{message.title}}</h4>
-                </div>
-                <div class="modal-body text-danger" ng-if="message.fatal">{{message.body}}</div>
-                <div class="modal-body text-warning" ng-if="!message.fatal&&!message.success">{{message.body}}</div>
-                <div class="modal-body text-success" ng-if="message.success">{{message.body}}</div>
-            </div>
-        </div>
-    </div>
-    <!-- message modal end -->
-
-    <!-- confirm dialog -->
-    <div class="modal fade" id="confirm-modal" tabindex="-1" role="dialog" aria-labelledby="confirmModal" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title text-danger">Confirm please</h4>
-                </div>
-                <div class="modal-body text-info">{{confirm.text}}</div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                    <button type="button" class="btn btn-primary" ng-click="passConfirm(confirmCallback);">Yes</button>
+        <!-- message modal -->
+        <div class="modal fade" id="message-modal" tabindex="-1" role="dialog" aria-labelledby="messageModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title text-danger" ng-if="message.fatal">{{message.title}}</h4>
+                        <h4 class="modal-title text-warning" ng-if="!message.fatal&&!message.success">{{message.title}}</h4>
+                        <h4 class="modal-title text-success" ng-if="message.success">{{message.title}}</h4>
+                    </div>
+                    <div class="modal-body text-danger" ng-if="message.fatal">{{message.body}}</div>
+                    <div class="modal-body text-warning" ng-if="!message.fatal&&!message.success">{{message.body}}</div>
+                    <div class="modal-body text-success" ng-if="message.success">{{message.body}}</div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- confirm dialog end -->
+        <!-- message modal end -->
 
+        <!-- confirm dialog -->
+        <div class="modal fade" id="confirm-modal" tabindex="-1" role="dialog" aria-labelledby="confirmModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title text-danger">Confirm please</h4>
+                    </div>
+                    <div class="modal-body text-info">{{confirm.text}}</div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                        <button type="button" class="btn btn-primary" ng-click="passConfirm(confirmCallback);">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- confirm dialog end -->
+    </div>
 </body>
 <script type="text/javascript">
     // import jQuery
