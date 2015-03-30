@@ -28,11 +28,11 @@ dbBrowser.config(['$routeProvider', '$httpProvider', function($routeProvider, $h
     	templateUrl: 'view/db/dbs.html',
     	controller: 'databaseController'
     })
-    .when('/table/list', {
+    .when('/table/list/:databaseId', {
     	templateUrl: 'view/table/tables.html',
     	controller: 'tableController'
     })
-    .when('/function/list', {
+    .when('/function/list/:databaseId', {
     	templateUrl: 'view/function/functions.html',
     	controller: 'functionController'
     })
@@ -44,7 +44,7 @@ dbBrowser.config(['$routeProvider', '$httpProvider', function($routeProvider, $h
     	templateUrl: 'view/system/config.html',
     	controller: 'systemController'
     })
-    .when('/sys/console', {
+    .when('/sys/console/:databaseId', {
     	templateUrl: 'view/system/console.html',
     	controller: 'systemController'
     })
