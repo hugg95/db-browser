@@ -1,7 +1,7 @@
 var mysql = require('mysql');
 
-// define connection instance, default is undefined
-var conn;
+// define connection instance, default is null
+var conn = null;
 
 exports.create = function(config) {
     conn = mysql.createConnection(config);
@@ -17,4 +17,3 @@ exports.connect = function(fn) {
         }
     }
 };
-

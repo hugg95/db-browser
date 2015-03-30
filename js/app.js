@@ -1,5 +1,17 @@
-var dbBrowser = angular.module('dbBrowser', ['ngRoute', 'browserModule', 'globalModule', 'connectionModule', 'databaseModule', 'tableModule', 'functionModule', 'userModule', 'systemModule']);
+// app and modules configuration
+var dbBrowser = angular.module('dbBrowser', [
+    'ngRoute', 
+    'browserModule', 
+    'globalModule', 
+    'connectionModule', 
+    'databaseModule', 
+    'tableModule', 
+    'functionModule', 
+    'userModule', 
+    'systemModule'
+]);
 
+// route configuration
 dbBrowser.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
     $routeProvider
     .when('/default', {
