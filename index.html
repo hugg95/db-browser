@@ -9,22 +9,12 @@
     <link href="css/style.css" rel="stylesheet" media="screen">
 </head>
 <body ng-controller="browserController">
-    <div ng-controller="connectionController">
+    <div>
         <div class="container-fluid">
             <ng-include src="'view/menu.html'"></ng-include>
             <div id="main" class="row">
-                <div class="col-sm-3 col-md-2">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Connections</div>
-                        <div class="panel-body">
-                            <div class="list-group">
-                                <a ng-repeat="conn in connections track by $index" href="#/db/list/{{conn.id}}" class="list-group-item list-group-item-info" 
-                                    ng-class="{active: currentConnection.id == conn.id}">
-                                <span class="glyphicon glyphicon-record"></span> {{conn.name}}</a>
-                                <div ng-if="!connections || connections.length==0"><span class="glyphicon glyphicon-info-sign"></span> No connections</div>
-                            </div>
-                        </div>
-                    </div>
+                <div>
+                    <ng-include src="'view/sidebar.html'"></ng-include>
                 </div>
                 <div class="col-sm-9 col-md-10">
                     <ng-view></ng-view>
@@ -84,6 +74,7 @@
     global.ngRoute = require('angular-route');
 
     global.$ = global.jQuery;
+
 </script>
 <script type="text/javascript" src="js/app.js"></script>
 <script type="text/javascript" src="js/controller/BrowserController.js"></script>
@@ -94,5 +85,6 @@
 <script type="text/javascript" src="js/controller/FunctionController.js"></script>
 <script type="text/javascript" src="js/controller/UserController.js"></script>
 <script type="text/javascript" src="js/controller/SystemController.js"></script>
+<script type="text/javascript" src="js/filter/GlobalFilter.js"></script>
 </html>
  

@@ -8,7 +8,8 @@ var dbBrowser = angular.module('dbBrowser', [
     'tableModule', 
     'functionModule', 
     'userModule', 
-    'systemModule'
+    'systemModule',
+    'filterModule'
 ]);
 
 // route configuration
@@ -20,9 +21,11 @@ dbBrowser.config(['$routeProvider', '$httpProvider', function($routeProvider, $h
     })
     .when('/conn/create', {
     	templateUrl: 'view/connection/connection.html',
+        controller: 'connectionController'
     })
     .when('/conn/open', {
     	templateUrl: 'view/connection/connection.html',
+        controller: 'connectionController'
     })
     .when('/db/list/:connectionId', {
     	templateUrl: 'view/db/dbs.html',

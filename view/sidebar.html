@@ -1,0 +1,29 @@
+<div class="col-sm-3 col-md-2">
+    <!-- connections panel -->
+    <div class="panel panel-default">
+        <div class="panel-heading">Connections</div>
+        <div class="panel-body">
+            <div class="list-group">
+                <a ng-repeat="conn in connections track by $index" href="#/db/list/{{conn.id}}" class="list-group-item list-group-item-info" 
+                    ng-class="{active: currentConnection.id == conn.id}" title="{{conn.name}}">
+                <span class="glyphicon glyphicon-record"></span> {{conn.name|StringLengthFilter}}</a>
+                <div ng-if="!connections || connections.length==0"><span class="glyphicon glyphicon-info-sign"></span> No connections</div>
+            </div>
+        </div>
+    </div>
+    <!-- connections panel end -->
+
+    <!-- databases panel -->
+    <div class="panel panel-default">
+        <div class="panel-heading">Databases</div>
+        <div class="panel-body">
+            <div class="list-group">
+                <a ng-repeat="db in databases track by $index" href="#/table/list/{{db.id}}" class="list-group-item list-group-item-info" 
+                    ng-class="{active: currentDatabase.id == db.id}">
+                <span class="glyphicon glyphicon-record"></span> {{db.Database}}</a>
+                <div ng-if="!databases || databases.length==0"><span class="glyphicon glyphicon-info-sign"></span> No databases</div>
+            </div>
+        </div>
+    </div>
+    <!-- database panel end -->
+</div>

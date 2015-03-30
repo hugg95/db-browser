@@ -2,72 +2,6 @@ var connectionModule = angular.module('connectionModule', []);
 
 connectionModule.controller('connectionController', ['$scope', '$window', '$location', function($scope, $window, $location) {
 
-	// the current connection
-	$scope.currentConnection = null;
-	$scope.setCurrentConnection = function(connection) {
-		$scope.currentConnection = connection;
-	};
-
-	$scope.connections = [];
-    if (localStorage.getItem('connections')) {
-    	$scope.connections = JSON.parse(localStorage.getItem('connections'));
-    }
-
-    $scope.setConnection = function(connection) {
-        $scope.connections.push(connection);
-        localStorage.setItem('connections', JSON.stringify($scope.connections));
-    };
-
-    $scope.removeConnection = function(id) {
-        var _index;
-        $scope.connections.forEach(function(item, index) {
-            if (item.id === id) {
-                _index = index;
-            }
-        });
-        if (typeof _index !== 'undefined') {
-            $scope.connections.splice(_index, 1);
-        }
-
-        localStorage.setItem('connections', JSON.stringify($scope.connections));
-    };
-
-    /**
-     * determines whether the connection has been created
-     * @param connection
-     */
-    $scope.connectionExist = function(connection) {
-
-    	if (!connection) {
-    		return false;
-    	}
-
-    	for (var i = 0; i < $scope.connections.length; i++) {
-    		var curr = $scope.connections[i];
-    		if (curr.id === connection.id) {
-    			return true;
-    		}
-    		if (curr.host === connection.host
-    			&& curr.port === connection.port
-    			&& curr.user === connection.user) {
-    			return true;
-    		}
-    	}
-
-    	return false;
-    };
-
-    /**
-     * clear all of the created connections
-     */
-    $scope.clearConnections = function() {
-    	localStorage.removeItem('connections');
-    	$scope.connections = [];
-    	$scope.setCurrentConnection(null);
-    	$scope.resetConnection();
-    	$scope.connectionBackup = null;
-    };
-
 	// default mysql connection config
 	$scope.connection = {
 		name: '',
@@ -75,19 +9,6 @@ connectionModule.controller('connectionController', ['$scope', '$window', '$loca
 		port: 3306,
 		user: 'root',
 		password: ''
-	};
-
-	/**
-	 * resets the connection to default state
-	 */
-	$scope.resetConnection = function() {
-		$scope.connection = {
-			name: '',
-			host: 'localhost',
-			port: 3306,
-			user: 'root',
-			password: ''
-		};
 	};
 
 	// message will displayed to user when creating a dupliate connection
@@ -185,15 +106,6 @@ connectionModule.controller('connectionController', ['$scope', '$window', '$loca
 
     };
 
-    /**
-     * callback function after connection created
-     */
-    $scope.connectCallback;
-
-    $scope.setConnectCallback = function(callback) {
-    	$scope.connectCallback = callback;
-    };
-
     $scope.setConnectCallback(function(arg) {
     	var msg = $scope.handleConnection(arg);
         if ($scope.connection.test) {
@@ -211,19 +123,6 @@ connectionModule.controller('connectionController', ['$scope', '$window', '$loca
         	}
         }
     });
-
-    /**
-	 * listen to the db-connect reply
-	 */
-	$scope.ipc.on('db-connect-reply', function(arg) {
-
-		$scope.$apply(function() {
-			if (typeof $scope.connectCallback === 'function') {
-				$scope.connectCallback(arg);
-			}
-		});
-
-	});
 
 }]);
 
