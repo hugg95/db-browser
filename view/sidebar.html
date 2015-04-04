@@ -19,9 +19,9 @@
         <div class="panel-body">
             <div class="list-group">
                 <a ng-repeat="db in databases track by $index" href="#/table/list/{{db.id}}" class="list-group-item list-group-item-info" 
-                    ng-class="{active: currentDatabase.id == db.id}">
+                    ng-class="{active: currentDatabase.id == db.id}" title="{{db.Database}}">
                 <span class="glyphicon glyphicon-record"></span> {{db.Database}}</a>
-                <div ng-if="!databases || databases.length==0"><span class="glyphicon glyphicon-info-sign"></span> No databases</div>
+                <!--div ng-if="!databases || databases.length==0"><span class="glyphicon glyphicon-info-sign"></span> No databases</div-->
             </div>
         </div>
     </div>
