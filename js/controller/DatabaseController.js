@@ -1,12 +1,6 @@
 var databaseModule = angular.module('databaseModule', []);
 
-databaseModule.controller('databaseController', ['$scope', '$routeParams', function($scope, $routeParams) {
-
-    $scope.currentDatabase = null;
-
-    $scope.setCurrentDatabase = function(database) {
-        $scope.currentDatabase = database;
-    };
+databaseModule.controller('databaseController', ['$scope', '$routeParams', '$window', function($scope, $routeParams, $window) {
 
 	$scope.showDbs = function() {
 		$scope.ipc.send('db-connect', $scope.currentConnection);
@@ -18,8 +12,6 @@ databaseModule.controller('databaseController', ['$scope', '$routeParams', funct
 	// set the global current connection
 	if (typeof $routeParams.connectionId !== 'undefined') {
 
-		$scope.databases = [];
-
 		$scope.connections.forEach(function(item, index) {
 			if (item.id == $routeParams.connectionId) {
 				$scope.setCurrentConnection(item);
@@ -30,14 +22,16 @@ databaseModule.controller('databaseController', ['$scope', '$routeParams', funct
 
 		$scope.ipc.on('show-dbs-reply', function(arg) {
 			$scope.$apply(function() {
-				var _database = JSON.parse(JSON.stringify(arg));
-
-				if (_database) {
-					for (var i = 0; i < _database.length; i++) {
-						var _item = _database[i];
+				var _databases = JSON.parse(JSON.stringify(arg));
+                var databases = [];
+				if (_databases) {
+					for (var i = 0; i < _databases.length; i++) {
+						var _item = _databases[i];
                         _item.id = i;
-						$scope.databases.push(_item);
+						databases.push(_item);
 					}
+
+                    $scope.setDatabases(databases);
 				}
 			});
 			

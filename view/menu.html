@@ -16,8 +16,8 @@
                         <li><a href="#/conn/close" class="btn disabled" role="button">Close connection</a></li>
                     </ul>
                 </li>
-                <li ng-if="!currentConnection" class="disabled"><a href="javascript:;"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Database</a></li>
-                <li ng-if="currentConnection"><a href="#/db/list/{{currentConnection.id}}"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Database</a></li>
+                <!-- <li ng-if="!currentConnection" class="disabled"><a href="javascript:;"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Database</a></li> -->
+                <!-- <li ng-if="currentConnection"><a href="#/db/list/{{currentConnection.id}}"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Database</a></li> -->
                 <li ng-if="!currentDatabase" class="disabled"><a href="javascript:;"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Table</a></li>
                 <li ng-if="currentDatabase"><a href="#/table/list"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Table</a></li>
                 <li ng-if="!currentDatabase" class="disabled"><a href="javascript:;"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Function</a></li>

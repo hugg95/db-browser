@@ -3,7 +3,7 @@ module.exports = function(grunt) {
         'build-atom-shell': {
             tag: 'v0.22.1',
             nodeVersion: '0.12.0',
-            buildDir: './atom-shell',
+            buildDir: './',
             projectName: 'DB-Browser',
             productName: 'DB-Browser'
         }

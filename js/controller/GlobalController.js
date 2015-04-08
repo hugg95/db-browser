@@ -126,6 +126,18 @@ globalModule.controller('globalController', ['$scope', '$window', '$location', f
         $scope.connectCallback = callback;
     };
 
+    // the current connection
+    $scope.currentDatabase = null;
+    $scope.setCurrentDatabase = function(database) {
+        $scope.currentDatabase = database;
+    };
+
+    $scope.databases = [];
+    $scope.setDatabases = function(databases) {
+        $scope.databases = databases;
+    };
+
+
     /**
      * listen to the db-connect reply
      */
